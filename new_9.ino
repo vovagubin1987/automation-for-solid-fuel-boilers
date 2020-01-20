@@ -771,7 +771,7 @@ if (tIn>tBreakOffIn and tOutputK > (tBreakOffK-tDeltaKCritical)){//если те
 if (tOutputK<33 and tOut<15){
   razgon_tmp=true;
 };
-if (tOutputK>40){
+if (tOutputK>47){
   razgon_tmp=false;
 };
 if (razgon and razgon_tmp) {
