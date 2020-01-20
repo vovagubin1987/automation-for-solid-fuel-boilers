@@ -54,13 +54,13 @@ signed short tIn=0; //температура в помещении
 unsigned char tBreakOffK = 80; //температура на выходе из котла для обязательного отключения вентелятора
 unsigned char tBreakOffIn = 18; //температура в помещении для отключения вентелятора
 unsigned char tDeltaKCritical = 18; //дельта температура от tBreakOffK на выходе из котла для обязательного включения вентелятора во имя обязательной температуры теплоносителя
-unsigned char tDeltaKCritical_economy = 35; //дельта температура от tBreakOffK на выходе из котла для обязательного включения вентелятора во имя обязательной температуры теплоносителя в эконом режиме(4)
+unsigned char tDeltaKCritical_economy = 25; //дельта температура от tBreakOffK на выходе из котла для обязательного включения вентелятора во имя обязательной температуры теплоносителя в эконом режиме(4)
 unsigned char tDeltaIn = 4; //дельта температура в помещении для регулировки скорости вращения от 100% до 0%
 unsigned char tOutCritical=21; //температура на улице для отключения вентелятора
 unsigned char ryj=12;//ручной коэффициент скорости
 
 signed char schet = 0;
-signed char schetPer = 11;
+signed char schetPer = 7;
 byte indexforindex = 0;
 unsigned short tmp1 = 0;
 float kof;
@@ -619,8 +619,8 @@ signed short tmp4 = 512;//переменная для оптимального
 
 if (tOutputK<(tBreakOffK-tDeltaKCritical)){
   tmp3=((1023/tDeltaIn)*tmp2*kof)/2;//в 2 раза медленнее чем ниже приведённая
-  if (tmp3<500){ //не менее 500(половина скорости вентелятора)
-    tmp3=512;
+  if (tmp3<100){ //не менее 500(половина скорости вентелятора)
+    tmp3=212;
   };
 };
 
@@ -768,7 +768,7 @@ if (tIn>tBreakOffIn and tOutputK > (tBreakOffK-tDeltaKCritical)){//если те
 //конец операция оптимизации и проверки
 
 //операция разгон котла
-if (tOutputK<25 and tOut<15){
+if (tOutputK<33 and tOut<15){
   razgon_tmp=true;
 };
 if (tOutputK>40){
@@ -871,6 +871,11 @@ bool Datchik(){//опрос датчиков
   //#define ETS_INTR_UNLOCK() ets_intr_unlock() //разрешение всех прерываний
   }
   
+    //защита от обрыва датчика
+if (tmp_tOutputK<-54){
+  tmp_tOutputK=100;
+};
+    
   };//
 
   
