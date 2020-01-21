@@ -1053,24 +1053,43 @@ void handlespecific() { //изменение
     signed char tmp103 = std::atoi (tmp93.c_str());
    
       //
-    
-    if (tmp103>7 or tmp103<0){
-      if (tmp103==21){
-      tmp103=21;
-    } else {
-      tmp103=1;
-    }
-    }
+    switch (tmp103){
+      case 0:
+        rew=0;
+        break;
+      case 1:
+        rew=1;
+        break;
+      case 2:
+        rew=2;
+        break;
+      case 3:
+        rew=3;
+        break;
+      case 4:
+        rew=4;
+        break;
+      case 5:
+        rew=5;
+        break;
+      case 6:
+        rew=6;
+        break;
+      case 7:
+        rew=7;
+        break;
+       case 21:
+        rew=21;
+        break;
+      default:
+        rew=1;
+        break;
+    };
     String tmp_str=String(tmp103);
     write_config_real("/rew",tmp_str);
     message +=server.arg("pew_");
       message +="ok"+str_debug;
-    rew=tmp103;
-    
-    //write_config_real("",String());
-    //tmp10 = server.arg("tBreakOffK");
-    
-    
+    //rew=tmp103; 
   };
 
   if (server.arg("pyj_")==""){
