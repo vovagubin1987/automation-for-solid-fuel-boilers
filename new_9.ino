@@ -59,8 +59,8 @@ unsigned char tDeltaIn = 4; //дельта температура в помещ�
 unsigned char tOutCritical=21; //температура на улице для отключения вентелятора
 unsigned char ryj=12;//ручной коэффициент скорости
 
-signed char schet = 0;
-signed char schetPer = 7;
+signed short schet = 0;
+signed short schetPer = 7;
 byte indexforindex = 0;
 unsigned short tmp1 = 0;
 float kof;
@@ -160,7 +160,7 @@ bool begin_config_init(){
   begin_file_config("/schetPer","11");
   begin_file_config("/neg","1");
   //
-  begin_file_config("rew","0");
+  begin_file_config("/rew","0");
   //begin_file_config("tBreakOffK","");
   //begin_file_config("tBreakOffK","");
 }
@@ -808,12 +808,12 @@ bool Datchik(){//опрос датчиков
   //ds.requestTemperatures(); // считываем температуру с датчиков
   //delay(1000);//необходимо не менее 750
   //#define ETS_INTR_LOCK() ets_intr_lock() //запрет прерываний
-  signed char  tmp_tInputK=0;
-  signed char tmp_tOutputK=100;
-  signed char tmp_tOutputC=0;
-  signed char tmp_tOut=20;
-  signed char tmp_tIn=16;
-  signed char tmp_tInputC=0;
+  signed short  tmp_tInputK=0;
+  signed short tmp_tOutputK=100;
+  signed short tmp_tOutputC=0;
+  signed short tmp_tOut=20;
+  signed short tmp_tIn=16;
+  signed short tmp_tInputC=0;
   
   
   if (indexforindex==0){
@@ -821,7 +821,7 @@ bool Datchik(){//опрос датчиков
     //#define ETS_INTR_LOCK() ets_intr_lock() //запрет прерываний
   ds.requestTemperaturesByAddress(sensor_tInputK);
   //delay(200);
-  tmp_tInputK=ds.getTempC(sensor_tInputK);
+  tmp_tInputK= (short) ds.getTempC(sensor_tInputK);
   //#define ETS_INTR_UNLOCK() ets_intr_unlock() //разрешение всех прерываний
   }
 
@@ -830,7 +830,7 @@ bool Datchik(){//опрос датчиков
   ds.requestTemperaturesByAddress(sensor_tOutputC);
   //
   delay(200);
-  tmp_tOutputC=ds.getTempC(sensor_tOutputC);
+  tmp_tOutputC= (short) ds.getTempC(sensor_tOutputC);
   //#define ETS_INTR_UNLOCK() ets_intr_unlock() //разрешение всех прерываний
   }
 
@@ -840,7 +840,7 @@ bool Datchik(){//опрос датчиков
   ds.requestTemperaturesByAddress(sensor_tOutputK);
   //
   delay(200);
-  tmp_tOutputK=ds.getTempC(sensor_tOutputK);
+  tmp_tOutputK= (short) ds.getTempC(sensor_tOutputK);
   //#define ETS_INTR_UNLOCK() ets_intr_unlock() //разрешение всех прерываний
   }
 
@@ -849,7 +849,7 @@ bool Datchik(){//опрос датчиков
   ds.requestTemperaturesByAddress(sensor_tOut);
   //
   delay(200);
-  tmp_tOut=ds.getTempC(sensor_tOut);
+  tmp_tOut= (short) ds.getTempC(sensor_tOut);
   //#define ETS_INTR_UNLOCK() ets_intr_unlock() //разрешение всех прерываний
   }
   
@@ -858,7 +858,7 @@ bool Datchik(){//опрос датчиков
   ds.requestTemperaturesByAddress(sensor_tIn);
   //#define ETS_INTR_UNLOCK() ets_intr_unlock() //разрешение всех прерываний
   //delay(200);
-  tmp_tIn=ds.getTempC(sensor_tIn);
+  tmp_tIn= (short) ds.getTempC(sensor_tIn);
   //#define ETS_INTR_UNLOCK() ets_intr_unlock() //разрешение всех прерываний
   }
   
@@ -867,7 +867,7 @@ bool Datchik(){//опрос датчиков
   ds.requestTemperaturesByAddress(sensor_tInputC);
   //
   delay(200);
-  tmp_tInputC=ds.getTempC(sensor_tInputC);
+  tmp_tInputC= (short) ds.getTempC(sensor_tInputC);
   //#define ETS_INTR_UNLOCK() ets_intr_unlock() //разрешение всех прерываний
   }
   
@@ -1165,10 +1165,10 @@ void loop()
   }
 //global +=1;
 if (global==1){
-   global=3;
-   init1();
-   begin_config_init();
-   read_config();
+   //global=3;
+   //init1();
+   //begin_config_init();
+   //read_config();
    //read_config_real;
 };
 
