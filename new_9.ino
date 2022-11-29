@@ -598,6 +598,9 @@ bool RegTrivial() { //регулировка оборотов вентелято
   //отсчёт счёта
   //schet=schet+1;
 zalp_c=zalp_c+1;
+if (zalp_c>100){
+  zalp_c=1;
+}
   
 Serial.println(schet);
 if (schet==schetPer){
