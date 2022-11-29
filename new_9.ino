@@ -774,8 +774,9 @@ if (rew==21){//21 режим
   if (zalp_per){
    zalp_per=false;
  } else{
-    if (zalp_c == 3){
+    if (zalp_c == 4){
       zalp_per=true;
+      zalp_c=1;
     }
  }
  
