@@ -67,6 +67,13 @@ float kof;
 bool razgon = true;
 bool razgon_tmp = false;
 bool negative = true;
+
+//залп
+bool zalp = true;
+bool zalp_per = false;
+unsigned char zalp_c = 1;
+//конец залп
+
 byte global = 0;
 
 String str_debug;
@@ -473,6 +480,8 @@ server.on("/otdacha", [](){
       message+="\n";
       message+=String(negative);
       message+="\n";
+      message+=String(zalp_per);
+      message+="\n";
       server.send(200, "text/plain", message);
   });
   
@@ -588,6 +597,8 @@ bool RegTrivial() { //регулировка оборотов вентелято
 
   //отсчёт счёта
   //schet=schet+1;
+zalp_c=zalp_c+1;
+  
 Serial.println(schet);
 if (schet==schetPer){
 
@@ -749,7 +760,25 @@ if (rew==21){//21 режим
   tmp1=ryj;
   Serial.println("ryj");
 }
-
+//залп
+ if (rew>3 AND rew<21){
+   if (zalp){
+    if (zalp_per){
+      if (tOutputK<71){
+       tmp1=1023; 
+      }
+    }
+   }
+ }
+ 
+  if (zalp_per){
+   zalp_per=false;
+ } else{
+    if (zalp_c == 3){
+      zalp_per=true;
+    }
+ }
+ 
 //операция оптимизации и проверки
 if (tmp1 > 1023){//чтоб было не более 1023(от 0 до 1023)
   tmp1=1023;
@@ -956,7 +985,7 @@ void handlespecific() { //изменение
     message="tBreakOffK Argument=";
     String tmp9=server.arg("tBreakOffK_");
     signed char tmp10 = std::atoi (tmp9.c_str());//only signed char иначе не пишет в конфиг
-    if (tmp10>90 or tmp10<50){
+    if (tmp10>94 or tmp10<50){
       tmp10=80;
     };
     String tmp_str=String(tmp10);
