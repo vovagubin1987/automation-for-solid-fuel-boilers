@@ -764,7 +764,7 @@ if (rew==21){//21 режим
   Serial.println("ryj");
 }
 //залп
- if (rew>3 AND rew<21){
+ if (rew>3 and rew<21){
    if (zalp){
     if (zalp_per){
       if (tOutputK<71){
