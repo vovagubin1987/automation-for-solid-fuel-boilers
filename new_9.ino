@@ -597,7 +597,7 @@ bool RegTrivial() { //регулировка оборотов вентелято
 
   //отсчёт счёта
   //schet=schet+1;
-zalp_c=zalp_c+1;
+
 if (zalp_c>100){
   zalp_c=1;
 }
@@ -607,7 +607,8 @@ if (schet==schetPer){
 
 
   
-
+zalp_c=zalp_c+1;
+  
 Serial.println(schet);
 delay(200);
   //делаем медиану
