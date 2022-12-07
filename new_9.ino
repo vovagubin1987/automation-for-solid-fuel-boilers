@@ -764,13 +764,16 @@ if (rew==21){//21 режим
   Serial.println("ryj");
 }
 //залп
- if (rew>3 and rew<21){
+ if (rew>3){
+   if (rew<21){
    if (zalp){
     if (zalp_per){
       if (tOutputK<71){
+        Serial.println("zalp OK");
        tmp1=1023; 
       }
     }
+   }
    }
  }
  
@@ -778,6 +781,7 @@ if (rew==21){//21 режим
    zalp_per=false;
  } else{
     if (zalp_c == 4){
+      Serial.println("zalp_c=4");
       zalp_per=true;
       zalp_c=1;
     }
@@ -1204,7 +1208,7 @@ if (global==1){
    //read_config();
    //read_config_real;
 };
-
+Serial.println("ver:0.10");
 if (millis() - lastTime > 17000){//раз в 17 секунду опрос и счёт
   
 Datchik();
