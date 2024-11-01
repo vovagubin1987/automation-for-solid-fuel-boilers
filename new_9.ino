@@ -71,6 +71,8 @@ bool negative = true;
 //залп
 bool zalp = true;
 bool zalp_per = false;
+unsigned char zalpdo=0;
+unsigned char zalpok=0;
 unsigned char zalp_c = 1;
 //конец залп
 
@@ -480,7 +482,9 @@ server.on("/otdacha", [](){
       message+="\n";
       message+=String(negative);
       message+="\n";
-      message+=String(zalp_per);
+      message+=String(zalpdo);
+      message+="\n";
+      message+=String(zalpok);
       message+="\n";
       server.send(200, "text/plain", message);
   });
@@ -771,7 +775,11 @@ if (rew==21){//21 режим
     if (zalp_per){
       if (tOutputK<71){
         Serial.println("zalp OK");
-       tmp1=1023; 
+        zalpdo=0;
+        zalpok=1;
+       tmp1=1023;
+        
+        
       }
     }
    }
@@ -781,10 +789,13 @@ if (rew==21){//21 режим
   if (zalp_per){
    zalp_per=false;
  } else{
+    zalpok=false;
     if (zalp_c == 4){
       Serial.println("zalp_c=4");
       zalp_per=true;
       zalp_c=1;
+      zalpdo=1;
+      
     }
  }
  
