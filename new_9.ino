@@ -536,7 +536,7 @@ server.on("/otdacha", [](){
     //message+=String(tInputK/schet);
     message+="</span></div>\n</body>\n</html>";
     server.send(200, "text/html", message);
-    Serial.println("The LED is now ON");
+    Serial.println("Ok");
   });
   // инициализация экрана
   //lcd.begin(4, 5);  // sda=gpio04, scl=gpio05
@@ -789,7 +789,7 @@ if (rew==21){//21 режим
   if (zalp_per){
    zalp_per=false;
  } else{
-    zalpok=false;
+    zalpok=0;
     if (zalp_c == 4){
       Serial.println("zalp_c=4");
       zalp_per=true;
